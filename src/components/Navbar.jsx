@@ -10,7 +10,7 @@ function Navbar() {
       </div>
       <div className='flex gap-4 sm:pr-5 pr-3'>
          <button className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600' >Sign up</button>
-         <button className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600' >Data</button>
+         <button className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600 hidden' >Data</button>
       </div>
     </div>
     </>
