@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SingUpForm from './components/SingUpForm';
 import Home from './pages/Home';
 import SignInForm from './components/SignInForm';
+import PatientsList from './pages/PatientsList';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
     <Route exact="true" path="/" element={<Home/>}/>
     <Route exact="true" path="/SignUp" element={<SingUpForm/>}/>
     <Route exact="true" path="/SignIn" element={<SignInForm/>}/>
+    <Route exact="true" path="/PatientsList" element={<PatientsList/>}/>
     </Routes>
     </BrowserRouter>
     </>

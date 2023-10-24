@@ -1,8 +1,9 @@
 import React from 'react'
 import { db } from '../config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
+import PatientCard from '../components/PatientCard';
 
-function App() {
+function PatientsList() {
 
     const [patientList, setPatientList] = useState([]);
   
@@ -27,19 +28,18 @@ function App() {
   
     return (
       <div className="App" style={{display:"flex",marginTop:"3rem",gap:"2rem", flexDirection:"column", alignItems:"center", justifyContent:"center"}}>
-        <Auth/>
-       {/* {patientList.map((patient)=>{
+
+       {patientList.map((patient)=>{
           return(
-            <Card
-            name= {patient.Name}
-            disease={patient.Disease}
+            <PatientCard
+            Name= {patient.Name}
+            phone= {patient.PhoneNumber}
+            bloodGroup= {patient.BloodGroup}
             date={patient.Date}
-            email= {patient.Email}
-            phone= {patient.Phone}
-            time= {patient.Time}
+            status= {patient.Status}
             />
           )
-        })} */}
+        })} 
       </div>
     );
   }
