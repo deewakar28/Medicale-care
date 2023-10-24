@@ -1,6 +1,6 @@
 import React from 'react'
 import doc from "../assets/doc2.png"
-function section1() {
+function Section1() {
   return (
    <>
    <section class="text-gray-600 body-font bg-gray-300 rounded-bl-[500px]">
@@ -20,4 +20,4 @@ function section1() {
   )
 }
 
-export default section1;
+export default Section1;

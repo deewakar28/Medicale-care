@@ -1,15 +1,18 @@
-import { useState } from 'react'
 import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import SingUpForm from './components/SingUpForm';
+import Home from './pages/Home';
 
-import Navbar from "./components/Navbar";
-import Section1 from "./components/section1.jsx";
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
-    <Navbar/>
-    <Section1/>
+    <BrowserRouter>
+    <Routes>
+    <Route exact="true" path="/" element={<Home/>}/>
+    <Route exact="true" path="/SignUp" element={<SingUpForm/>}/>
+    </Routes>
+    </BrowserRouter>
     </>
   )
 }
