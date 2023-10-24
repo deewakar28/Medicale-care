@@ -1,45 +1,43 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { auth } from '../config/firebase'
-import { createUserWithEmailAndPassword} from 'firebase/auth'
+import {signInWithEmailAndPassword} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 
-const SingUpForm = () => {
-
+const SignInForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const singUp = async()=>{
+    const singIn = async()=>{
       try{
-          await createUserWithEmailAndPassword(auth,email, password)
+          await signInWithEmailAndPassword(auth,email, password)
           .then((userCredential)=>{
             const user = userCredential.user;
             console.log(user);
             setTimeout(()=>{
-              alert("Registered Successfully!!");
+              alert(user.email+" Login Successfully!!");
               document.getElementById('signup').style.display = 'none';     
               document.getElementById('googleSignIn').style.display = 'none';
-              document.getElementById('logout').style.display='block';
+              document.getElementById('logout').style.display = 'block';
             },1000)
           })
-          navigate("/"); 
+          navigate("/Home"); 
+                 
       }
-      catch(err){
-          console.log(err);
+      catch(error){
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        alert(errorMessage);
       }
+    
   }
-
   return (
     <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-                    {/*<input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="fullname"
-  placeholder="Full Name" />*/}
- 
+                    <h1 class="mb-8 text-3xl text-center">Sign In</h1>
+
                     <input 
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
@@ -59,24 +57,19 @@ const SingUpForm = () => {
                           setPassword(e.target.value)
                         }}
                         placeholder="Password" />
-                    {/*<input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="confirm_password"
-                      placeholder="Confirm Password" />*/}
-
+                    
                     <button
-                        onClick={singUp}
+                        onClick={singIn}
                         type="submit"
                         class="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
-                    >Create Account</button>
+                    >Log In</button>
                 </div>
 
                 <div class="text-grey-dark mt-6">
-                    Already have an account? 
+                    Don't you have an account yet? 
 
                     <a class="no-underline border-b border-blue text-blue-500 font-bold" href="/SignIn">
-                         Log in.
+                         Sign Up.
                     </a>
                 </div>
             </div>
@@ -84,4 +77,4 @@ const SingUpForm = () => {
   )
 }
 
-export default SingUpForm
+export default SignInForm

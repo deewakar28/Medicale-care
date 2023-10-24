@@ -13,6 +13,7 @@ const GoogleSignIn = () => {
     }
   return (
     <button
+    id='googleSignIn'
     onClick={signInWithGoogle} 
     className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600' >
       Google Sign in
