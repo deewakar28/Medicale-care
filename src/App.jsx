@@ -4,7 +4,8 @@ import SingUpForm from './components/SingUpForm';
 import Home from './pages/Home';
 import SignInForm from './components/SignInForm';
 import PatientsList from './pages/PatientsList';
-import NewPatientForm from './components/NewPatientForm';
+import NewPatientForm from './components/newPatientForm';
+import NewForm from './components/NewForm';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <Route exact="true" path="/SignIn" element={<SignInForm/>}/>
     <Route exact="true" path="/PatientsList" element={<PatientsList/>}/>
     <Route exact="true" path="/NewPatientForm" element={<NewPatientForm/>}/>
+    <Route exact="true" path="/NewForm" element={<NewForm/>}/>
     </Routes>
     </BrowserRouter>
     </>
