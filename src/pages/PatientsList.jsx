@@ -1,6 +1,6 @@
 import React from 'react'
 import { db } from '../config/firebase';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection} from 'firebase/firestore';
 import PatientCard from '../components/PatientCard';
 import { useEffect, useState } from 'react'
 import patient from "../assets/patient.png"
@@ -9,23 +9,21 @@ import logo from "../assets/logo.png"
 function PatientsList() {
 
   const [patientList, setPatientList] = useState([]);
-
   const patientCollectionRef = collection(db, "PatientsList");
 
-  useEffect(() => {
-    const getPatientList = async () => {
-      try {
-        const data = await getDocs(patientCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-        setPatientList(filteredData);
-      } catch (err) {
-        console.log(err);
-      }
+  const getPatientList = async () => {
+    try {
+      const data = await getDocs(patientCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+      setPatientList(filteredData);
+    } catch (err) {
+      console.log(err);
     }
-
+  }
+  useEffect(() => {
     getPatientList();
   }, [])
 
@@ -37,7 +35,7 @@ function PatientsList() {
         <img src={logo} alt="" className='h-[10vh]'/>
         <h1 className='sm:text-2xl text-[17px] text-cyan-500 font-semibold hidden sm:block'>Medical Care</h1>
       </div>
-      <div><button  className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600'>Add Patient</button></div>
+      <a href="/NewPatientForm"><button  className='sm:px-3 sm:py-2 px-2 py-1 rounded-[25px] bg-cyan-500 text-white hover:scale-95 hover:bg-cyan-600'>Add Patient</button></a>
     </div>
       <div className='w-[90vw] bg-gray-300 lg:flex-row lg:h-[9vh] mx-auto rounded-2xl justify-between items-center px-2 lg:flex flex-col gap-4 py-4 lg:py-0 hidden '>
 

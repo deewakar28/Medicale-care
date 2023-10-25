@@ -1,16 +1,46 @@
 import React from 'react'
+import { db } from '../config/firebase';
+import { addDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom';
 
-function newPatientForm() {
+function NewPatientForm() {
+
+  const patientCollectionRef = collection(db, "PatientsList");
+
+  const [newName, setNewName] = useState("");
+  const [newDate, setNewDate] = useState("");
+  const [newPhone, setNewPhone] = useState("");
+  const [newBloodGroup, setNewBloodGroup] = useState("");
+  const [newStatus, setNewStatus] = useState("");
+  
+  const navigate = useNavigate();
+
+  const addNewPatient = async()=>{
+    try{
+        await addDoc(patientCollectionRef, {
+            Name: newName,
+            PhoneNumber: newPhone,
+            Date: newDate,
+            BloodGroup: newBloodGroup,
+            Status: newStatus,
+        })
+        navigate("/PatientsList")
+    }catch(err){
+        console.log(err);
+    }
+  }
   return (
   <>
   <section class=" bg-cyan-500">
   <div class="py-5 px-4 mx-auto max-w-2xl">
       <h2 class="mb-4 text-xl font-bold text-white">Add a new Patient</h2>
-      <form action="#">
+      <form>
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div class="sm:col-span-2">
                   <label for="name" class="block mb-2 text-sm font-medium text-white ">Patient's Name</label>
-                  <input type="text" name="name" id="name" class=" border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-300 " placeholder="Type full name" required=""/>
+                  <input value={newName} onChange={e=>{
+                    setNewName(e.target.value)
+                  }} type="text" name="name" id="name" class=" border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-300 " placeholder="Type full name" required=""/>
               </div>
               <div>
                   <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
@@ -24,15 +54,21 @@ function newPatientForm() {
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                  <input type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
+                  <input value={newphone} onChange={e=>{
+                    setNewPhone(e.target.value);
+                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blood Group</label>
-                  <input type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Blood Group" required=""/>
+                  <input value={newBloodGroup} onChange={e=>{
+                    setNewBloodGroup(e.target.value);
+                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Blood Group" required=""/>
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                  <input type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Date" required=""/>
+                  <input value={newDate} onChange={e=>{
+                    setNewDate(e.target.value);
+                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Date" required=""/>
               </div>
               
               <div class="sm:col-span-2">
@@ -45,10 +81,12 @@ function newPatientForm() {
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Immunisation status</label>
-                  <input type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
+                  <input value={newStatus} onChange={e=>{
+                    setNewStatus(e.target.value);
+                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
               </div>
           </div>
-          <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-900 bg-gray-300 rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-gray-400 hover:scale-95">
+          <button onClick={addNewPatient} class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-900 bg-gray-300 rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-gray-400 hover:scale-95">
               Add patient
           </button>
       </form>
@@ -58,4 +96,4 @@ function newPatientForm() {
   )
 }
 
-export default newPatientForm
+export default NewPatientForm
