@@ -57,7 +57,7 @@ const SignInForm = () => {
                     <button
                         onClick={singIn}
                         type="submit"
-                        class="w-full text-center py-3 rounded bg-green-600 text-white hover:bg-green-dark focus:outline-none my-1"
+                        class="w-full text-center py-3 rounded bg-cyan-500 text-white hover:bg-green-dark focus:outline-none my-1"
                     >Log In</button>
                 </div>
 
