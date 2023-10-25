@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { db } from '../config/firebase';
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 function NewPatientForm() {
@@ -14,14 +14,13 @@ function NewPatientForm() {
   const [newStatus, setNewStatus] = useState("");
   
   const navigate = useNavigate();
-
-  const addNewPatient = async()=>{
+ const addNewPatient = async()=>{
     try{
         await addDoc(patientCollectionRef, {
+            BloodGroup: newBloodGroup,
+            Date: newDate,
             Name: newName,
             PhoneNumber: newPhone,
-            Date: newDate,
-            BloodGroup: newBloodGroup,
             Status: newStatus,
         })
         navigate("/PatientsList")
@@ -31,67 +30,52 @@ function NewPatientForm() {
   }
   return (
   <>
-  <section class=" bg-cyan-500">
-  <div class="py-5 px-4 mx-auto max-w-2xl">
-      <h2 class="mb-4 text-xl font-bold text-white">Add a new Patient</h2>
-      <form>
-          <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-              <div class="sm:col-span-2">
-                  <label for="name" class="block mb-2 text-sm font-medium text-white ">Patient's Name</label>
-                  <input value={newName} onChange={e=>{
-                    setNewName(e.target.value)
-                  }} type="text" name="name" id="name" class=" border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-300 " placeholder="Type full name" required=""/>
-              </div>
-              <div>
-                  <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
-                  <select id="category" class="bg-gray-300 border border-gray-600 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                      <option selected="">Select gender</option>
-                      <option >Male</option>
-                      <option >Female</option>
-                      <option >Rather not say</option>
-                   
-                  </select>
-              </div>
-              <div class="w-full">
-                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                  <input value={newPhone} onChange={e=>{
-                    setNewPhone(e.target.value);
-                  }}  name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
-              </div>
-              <div class="w-full">
-                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blood Group</label>
-                  <input value={newBloodGroup} onChange={e=>{
-                    setNewBloodGroup(e.target.value);
-                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Blood Group" required=""/>
-              </div>
-              <div class="w-full">
-                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                  <input value={newDate} onChange={e=>{
-                    setNewDate(e.target.value);
-                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Date" required=""/>
-              </div>
-              
-              <div class="sm:col-span-2">
-                  <label for="description" class="block mb-2 text-sm font-medium text-white ">Problem & Diagonose</label>
-                  <textarea id="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-300 rounded-lg border border-gray-600 focus:ring-primary-500 focus:border-primary-500 " placeholder="Your description here"></textarea>
-              </div>
-              <div class="w-full">
-                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Medicine Required</label>
-                  <input type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
-              </div>
-              <div class="w-full">
-                  <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Immunisation status</label>
-                  <input value={newStatus} onChange={e=>{
-                    setNewStatus(e.target.value);
-                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
-              </div>
-          </div>
-          <button onClick={addNewPatient} class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-gray-900 bg-gray-300 rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-gray-400 hover:scale-95">
-              Add patient
-          </button>
-      </form>
-  </div>
-</section>
+  
+   <div className='flex flex-col justify-center items-center w-full min-h-[100vh] gap-3 bg-cyan-500  text-white'>
+    <h1 className='text-3xl font-bold'>Add a new patient</h1>
+   <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Patient's Name</label>
+    <input  type="text" placeholder='Full Name...' className='sm:w-[500px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-600' onChange={(e) => setNewName(e.target.value)}/>
+    </div>
+    <div className='sm:flex gap-5 '>
+    <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Patient's Gender</label>   
+    <input type="text" placeholder='Gender...' className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'/> 
+    </div>
+    <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Patient's Phone number</label>  
+    <input type="text" placeholder='Phone...' className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'  onChange={(e) => setNewPhone(e.target.value)}/>
+    </div>
+    </div>
+    <div className='sm:flex gap-5'>
+    <div>   
+    <label for="name" class="block mb-2 text-sm font-medium ">Patient's Blood Group</label>
+    <input type="text" placeholder='Blood...' className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'  onChange={(e) => setNewBloodGroup(e.target.value)}/>
+    </div>
+    <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Date</label>
+    <input type="text" placeholder='Date...'  className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900' onChange={(e) => setNewDate(e.target.value)}/>
+    </div>
+    </div>
+    <div>
+                  <label for="description" className="block mb-2 text-sm font-medium text-white ">Problem & Diagonose</label>
+                  <textarea id="description" rows="8" className="sm:w-[500px] w-[90vw] rounded-lg border-[2px] border-gray-600 text-gray-900" placeholder="Describe your problem"></textarea>
+    </div>
+    <div className='sm:flex gap-5'>
+
+        <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Patient's Status</label>
+    <input type="text" placeholder='Status...' className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'  onChange={(e) => setNewStatus(e.target.value)}/>
+    </div>
+    <div>
+    <label for="name" class="block mb-2 text-sm font-medium ">Medicine Required</label>
+    <input type="text" placeholder='Medicine...'  className='sm:w-[240px] w-[90vw] border-[2px] border-gray-900 h-8 rounded-lg text-gray-600' />
+    </div>
+    </div>
+    <button className='p-2 bg-gray-300 text-gray-900  rounded-lg hover:scale-95' onClick={addNewPatient}>add patient</button>
+   </div>
+
+
   </>
   )
 }
