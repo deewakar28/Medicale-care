@@ -1,8 +1,8 @@
 import React from 'react'
 import { db } from '../config/firebase';
-import { addDoc } from 'firebase/firestore'
+import { addDoc, collection } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
 function NewPatientForm() {
 
   const patientCollectionRef = collection(db, "PatientsList");
@@ -54,9 +54,9 @@ function NewPatientForm() {
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                  <input value={newphone} onChange={e=>{
+                  <input value={newPhone} onChange={e=>{
                     setNewPhone(e.target.value);
-                  }} type="text" name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
+                  }}  name="brand" id="brand" class="bg-gray-300 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone Number" required=""/>
               </div>
               <div class="w-full">
                   <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Blood Group</label>

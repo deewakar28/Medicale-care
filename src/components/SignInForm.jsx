@@ -17,11 +17,10 @@ const SignInForm = () => {
             setTimeout(()=>{
               alert(user.email+" Login Successfully!!");
               document.getElementById('signup').style.display = 'none';     
-              document.getElementById('googleSignIn').style.display = 'none';
               document.getElementById('logout').style.display = 'block';
             },1000)
           })
-          navigate("/Home"); 
+          navigate("/"); 
                  
       }
       catch(error){

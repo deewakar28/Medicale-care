@@ -10,7 +10,6 @@ const Logout = () => {
         console.log("Sign-Out successful.");
         alert("Sign-Out successful.");
         document.getElementById('signup').style.display = 'block';     
-        document.getElementById('googleSignIn').style.display = 'block';
         document.getElementById('logout').style.display = 'none';
         document.getElementById('data').style.display = 'none';
         }catch(err){
