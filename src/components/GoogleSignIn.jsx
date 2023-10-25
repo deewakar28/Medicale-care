@@ -6,7 +6,18 @@ const GoogleSignIn = () => {
 
     const signInWithGoogle= async()=>{
         try{
-            await signInWithPopup(auth, googleProvider);
+            await signInWithPopup(auth, googleProvider)
+            .then((userCredential)=>{
+              const user = userCredential.user;
+              console.log(user);
+              setTimeout(()=>{
+                alert("Registered Successfully!!");
+                document.getElementById('signup').style.display = 'none';     
+                document.getElementById('googleSignIn').style.display = 'none';
+                document.getElementById('logout').style.display='block';
+                document.getElementById('data').style.display = 'block';
+              },1000)
+            })
         }catch(err){
             console.log(err);
         }

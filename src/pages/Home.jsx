@@ -7,6 +7,7 @@ const Home = () => {
     <div>
         <Navbar/>
         <Section1/>
+    
     </div>
   )
 }

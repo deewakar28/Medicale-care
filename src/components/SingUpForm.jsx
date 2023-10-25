@@ -20,6 +20,7 @@ const SingUpForm = () => {
               document.getElementById('signup').style.display = 'none';     
               document.getElementById('googleSignIn').style.display = 'none';
               document.getElementById('logout').style.display='block';
+              document.getElementById('data').style.display = 'block';
             },1000)
           })
           navigate("/"); 
@@ -58,7 +59,7 @@ const SingUpForm = () => {
                         onChange={e=>{
                           setPassword(e.target.value)
                         }}
-                        placeholder="Password" />
+                        placeholder="Password" required/>
                     {/*<input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
