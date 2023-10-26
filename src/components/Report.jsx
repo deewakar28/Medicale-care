@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "../assets/logo.png"
-function Report() {
+function Report(prop) {
 return (
    <>
    <div className='w-full h-[100vh] bg-cyan-500 flex flex-col gap-5 justify-center items-center'>
@@ -15,20 +15,20 @@ return (
            <div className='flex lg:flex-row flex-col
             md:w-[50vw] justify-between'>
             <div className='flex flex-col gap-2 py-2'>
-            <p>Name: Name</p> 
-            <p>Gender: Gender</p>      
-            <p>Phone Number: Phone number</p>
+            <p>{prop.name}</p> 
+            <p>{prop.gender}</p>      
+            <p>{prop.phone}</p>
             </div>
             <div className='flex flex-col gap-2 '>
-            <p>Date: Date</p>
-            <p>Blood Group: Blood Group</p>
-            <p>Medicine: Medicine</p>
+            <p>{prop.date}</p>
+            <p>{prop.bloodGroup}</p>
+            <p>{prop.medicine}</p>
             </div>
            </div>
            <div>
-            <p>Problem: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam enim deleniti ratione, voluptatibus voluptatem quaerat commodi. Veniam repudiandae numquam ipsam earum expedita maxime, magni, dolore nulla totam, iste similique quibusdam?</p>
+            <p>{prop.problem}</p>
            </div>
-           <div>Status: Status</div>
+           <div>{prop.status}</div>
         </div>
     </div>
     </div>

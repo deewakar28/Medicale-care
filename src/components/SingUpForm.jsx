@@ -6,6 +6,7 @@ import SignUp from "../assets/SignUp.png"
 import googleLogo from "../assets/googleLogo.png"
 import {useFormik} from 'formik';
 import {signUpSchema} from '../schemas'
+
 function SignUpForm() {
 
 // const [email, setEmail] = useState("");
@@ -20,12 +21,11 @@ function SignUpForm() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit }=useFormik({
     initialValues:initialValues,
     validationSchema:signUpSchema,
-    onSubmit: async(values, action) => {
+    onSubmit: async(values) => {
       console.log(
         "🚀 ~ file: Registration.jsx ~ line 11 ~ Registration ~ values",
         values
       );
-      action.resetForm();
       try{
         await createUserWithEmailAndPassword(auth,values.email, values.password)
         .then((userCredential)=>{

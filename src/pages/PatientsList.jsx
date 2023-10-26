@@ -1,29 +1,31 @@
 import React from 'react'
 import { db } from '../config/firebase';
 import { getDocs, collection} from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore'
 import PatientCard from '../components/PatientCard';
 import { useEffect, useState } from 'react'
 import patient from "../assets/patient.png"
 import logo from "../assets/logo.png"
+
 
 function PatientsList() {
 
   const [patientList, setPatientList] = useState([]);
   const patientCollectionRef = collection(db, "PatientsList");
 
-  const getPatientList = async () => {
-    try {
-      const data = await getDocs(patientCollectionRef);
-      const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }))
-      setPatientList(filteredData);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   useEffect(() => {
+    const getPatientList = async () => {
+      try {
+        const data = await getDocs(patientCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+        setPatientList(filteredData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     getPatientList();
   }, [])
 
@@ -56,6 +58,7 @@ function PatientsList() {
             bloodGroup={patient.BloodGroup}
             date={patient.Date}
             status={patient.Status}
+            id = {patient.id}
           />
         )
       })}
