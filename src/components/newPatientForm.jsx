@@ -12,7 +12,9 @@ function NewPatientForm() {
   const [newPhone, setNewPhone] = useState("");
   const [newBloodGroup, setNewBloodGroup] = useState("");
   const [newStatus, setNewStatus] = useState("");
-  
+  const [newGender, setNewGender] = useState("");
+  const [newProblem, setNewProblem] = useState("");
+  const [newMedicine, setNewMedicine]= useState("");
   const navigate = useNavigate();
  const addNewPatient = async()=>{
     try{
@@ -22,6 +24,9 @@ function NewPatientForm() {
             Name: newName,
             PhoneNumber: newPhone,
             Status: newStatus,
+            Gender: newGender,
+            Problem: newProblem,
+            Medicine: newMedicine,
         })
         navigate("/PatientsList")
     }catch(err){
@@ -40,7 +45,7 @@ function NewPatientForm() {
     <div className='sm:flex gap-5 '>
     <div>
     <label for="name" class="block mb-2 text-sm font-medium ">Patient's Gender</label>   
-    <input type="text" placeholder='Gender...' className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'/> 
+    <input type="text" placeholder='Gender...' onChange={(e) => setNewGender(e.target.value)} className='sm:w-[240px] w-[90vw] border-[2px] border-gray-600 h-8 rounded-lg text-gray-900'/> 
     </div>
     <div>
     <label for="name" class="block mb-2 text-sm font-medium ">Patient's Phone number</label>  
@@ -59,7 +64,7 @@ function NewPatientForm() {
     </div>
     <div>
                   <label for="description" className="block mb-2 text-sm font-medium text-white ">Problem & Diagonose</label>
-                  <textarea id="description" rows="8" className="sm:w-[500px] w-[90vw] rounded-lg border-[2px] border-gray-600 text-gray-900" placeholder="Describe your problem"></textarea>
+                  <textarea id="description" onChange={(e) => setNewProblem(e.target.value)} rows="8" className="sm:w-[500px] w-[90vw] rounded-lg border-[2px] border-gray-600 text-gray-900" placeholder="Describe your problem"></textarea>
     </div>
     <div className='sm:flex gap-5'>
 
@@ -69,7 +74,7 @@ function NewPatientForm() {
     </div>
     <div>
     <label for="name" class="block mb-2 text-sm font-medium ">Medicine Required</label>
-    <input type="text" placeholder='Medicine...'  className='sm:w-[240px] w-[90vw] border-[2px] border-gray-900 h-8 rounded-lg text-gray-600' />
+    <input type="text" onChange={(e) => setNewMedicine(e.target.value)} placeholder='Medicine...'  className='sm:w-[240px] w-[90vw] border-[2px] border-gray-900 h-8 rounded-lg text-gray-600' />
     </div>
     </div>
     <button className='p-2 bg-gray-300 text-gray-900  rounded-lg hover:scale-95' onClick={addNewPatient}>add patient</button>
