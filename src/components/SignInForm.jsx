@@ -32,7 +32,8 @@ const SignInForm = () => {
             console.log(user);
             setTimeout(()=>{
               alert(user.email+" Login Successfully!!");
-              document.getElementById('signup').style.display = 'none';     
+              document.getElementById('signup').style.display = 'none'; 
+              document.getElementById('data').style.display= 'block';  
               document.getElementById('logout').style.display = 'block';
             },1000)
           })

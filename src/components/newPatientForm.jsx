@@ -1,5 +1,5 @@
 import React from 'react';
-import { db } from '../config/firebase';
+import { db, auth } from '../config/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -52,6 +52,7 @@ function NewPatientForm() {
                 Gender: newGender,
                 Problem: newProblem,
                 Medicine: newMedicine,
+                userId: auth?.currentUser?.uid,
             })
             navigate("/PatientsList")
         }
