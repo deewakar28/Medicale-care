@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { auth } from '../config/firebase'
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
+import SignUp from "../assets/SignUp.png"
 
 const SignInForm = () => {
     const [email, setEmail] = useState("");
@@ -29,42 +30,55 @@ const SignInForm = () => {
     
   }
   return (
-    <div class="bg-grey-lighter min-h-screen flex flex-col">
-            <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+    <div class="bg-cyan-500 min-h-screen lg:flex ">
+             <div className='lg:h-[100vh] h-auto lg:w-[50vw] w-full flex items-center justify-center'>
+              <div>
+               <img src={SignUp} alt="" className='lg:h-[90vh] sm:h-[80vh] h-auto'/>
+              </div>
+             </div>
+      
+            <div class="lg:W-[49vw]   flex flex-col items-center justify-center px-2">
+                <div class=" px-6 lg:py-9  text-black ">
                     <h1 class="mb-8 text-3xl text-center">Sign In</h1>
-
+                    <label className="text-black sm:text-2xl text-[18px] tracking-wide">
+                    Email
+                  </label>
+                   <div className=' border-b border-black mb-4'>
                     <input 
                         type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        class="lg:w-[35vw] w-[80vw] bg-transparent h-[35px]"
                         name="email"
                         value={email}
                         onChange={e=>{
                           setEmail(e.target.value)
                         }}
-                        placeholder="Email" />
-
+                       />
+                    </div>
+                    <label htmlFor="password" className="text-black sm:text-2xl text-[18px] tracking-wide max-w-[289px] pt-4 max-md:mt-10">
+                    Password
+                  </label>
+                    <div className=' border-b border-black mb-4'>
                     <input 
                         type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        class="lg:w-[35vw] w-[80vw] bg-transparent h-[35px]"
                         name="password"
                         value={password}
                         onChange={e=>{
                           setPassword(e.target.value)
                         }}
-                        placeholder="Password" />
-                    
+                     />
+                      </div>
                     <button
                         onClick={singIn}
                         type="submit"
-                        class="w-full text-center py-3 rounded bg-cyan-500 text-white hover:bg-green-dark focus:outline-none my-1"
+                        className="text-cyan-500 text-opacity-90 text-xl font-medium  bg-black  p-3 rounded-2xl hover:scale-95 lg:w-[35vw] w-[80vw]"
                     >Log In</button>
                 </div>
 
-                <div class="text-grey-dark mt-6">
-                    Don't you have an account yet? 
+                <div class="text-grey-dark mt-6 mb-10 md:text-2xl">
+                    Don't you have an account yet?   
 
-                    <a class="no-underline border-b border-blue text-blue-500 font-bold" href="/SignIn">
+                    <a class=" md:text-2xl font-bold" href="/SignUp">
                          Sign Up.
                     </a>
                 </div>
