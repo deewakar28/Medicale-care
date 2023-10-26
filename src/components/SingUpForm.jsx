@@ -1,14 +1,50 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { auth ,googleProvider} from '../config/firebase'
 import { createUserWithEmailAndPassword, signInWithPopup} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import SignUp from "../assets/SignUp.png"
 import googleLogo from "../assets/googleLogo.png"
+import {useFormik} from 'formik';
+import {signUpSchema} from '../schemas'
 function SignUpForm() {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+// const [email, setEmail] = useState("");
+//  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit }=useFormik({
+    initialValues:initialValues,
+    validationSchema:signUpSchema,
+    onSubmit: async(values, action) => {
+      console.log(
+        "🚀 ~ file: Registration.jsx ~ line 11 ~ Registration ~ values",
+        values
+      );
+      action.resetForm();
+      try{
+        await createUserWithEmailAndPassword(auth,values.email, values.password)
+        .then((userCredential)=>{
+          const user = userCredential.user;
+          console.log(user);
+          setTimeout(()=>{
+            alert("Registered Successfully!!");
+            document.getElementById('signup').style.display = 'none';     
+            document.getElementById('logout').style.display='block';
+            document.getElementById('data').style.display = 'block';
+          },1000)
+        })
+       navigate("/"); 
+    }
+    catch(err){
+        console.log(err);
+    }
+    },
+  });
 
   const signInWithGoogle= async()=>{
     try{
@@ -29,25 +65,25 @@ function SignUpForm() {
     }
 }
 
-  const singUp = async()=>{
-    try{
-        await createUserWithEmailAndPassword(auth,email, password)
-        .then((userCredential)=>{
-          const user = userCredential.user;
-          console.log(user);
-          setTimeout(()=>{
-            alert("Registered Successfully!!");
-            document.getElementById('signup').style.display = 'none';     
-            document.getElementById('logout').style.display='block';
-            document.getElementById('data').style.display = 'block';
-          },1000)
-        })
-       navigate("/"); 
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+//   const singUp = async()=>{
+//     try{
+//         await createUserWithEmailAndPassword(auth,values.email, values.password)
+//         .then((userCredential)=>{
+//           const user = userCredential.user;
+//           console.log(user);
+//           setTimeout(()=>{
+//             alert("Registered Successfully!!");
+//             document.getElementById('signup').style.display = 'none';     
+//             document.getElementById('logout').style.display='block';
+//             document.getElementById('data').style.display = 'block';
+//           },1000)
+//         })
+//        navigate("/"); 
+//     }
+//     catch(err){
+//         console.log(err);
+//     }
+// }
   
   return (
     <main className="bg-cyan-500 bg-opacity-90 flex flex-col px-5">
@@ -66,21 +102,28 @@ function SignUpForm() {
                 Create an account
               </h1>
               
-                <div className="flex sm:w-[40vw] max-w-full flex-col 0 ml-3.5  ">
+              <form onSubmit={handleSubmit}>
+              <div className="flex sm:w-[40vw] max-w-full flex-col 0 ml-3.5  ">
                   <label className="text-black sm:text-2xl text-[18px] tracking-wide">
                     Email
                   </label>
                   <div className="flex flex-col relative shrink-0 box-border rounded-3xl">
                     <input
                       type="email"
-                  
-                      value={email}
-                        onChange={e=>{
-                          setEmail(e.target.value)
-                        }}
+                      // value={email}
+                      //   onChange={e=>{
+                      //     setEmail(e.target.value)
+                      //   }}
                       name="email"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      autoComplete='off'
                       className="bg-transparent  h-[35px]"
-                    />
+                     // placeholder='xyz@gmail.com'
+                    />{errors.email && touched.email ? (
+                      <p className="form-error text-red-600">{errors.email}</p>
+                    ) : null}
                   </div>
                   <div className="bg-black w-full h-px " />
                   <label htmlFor="password" className="text-black sm:text-2xl text-[18px] tracking-wide max-w-[289px] pt-4 max-md:mt-10">
@@ -90,20 +133,31 @@ function SignUpForm() {
                     <input
                       type="password"
                     
-                      value={password}
-                        onChange={e=>{
-                          setPassword(e.target.value)
-                        }}
+                      // value={password}
+                      //   onChange={e=>{
+                      //     setPassword(e.target.value)
+                      //   }}
                       name="password"
+                      autoComplete='off'
+                        value={values.password}
+                        onChange={handleChange}
+                      onBlur={handleBlur}
                       className="bg-transparent h-[35px]"
-                    />
+                      //placeholder=""
+                    /> {errors.password && touched.password ? (
+                      <p className="form-error text-red-600">{errors.password}</p>
+                    ) : null}
                   </div>
+                  
                   <div className="bg-black w-full h-px mt-0.5 " />
-                </div>
-                <div className="flex sm:w-[39vw] max-w-full flex-col pt-8 gap-4 ml-5">
-                  <button onClick={singUp}  className="text-cyan-500 text-opacity-90 text-xl font-medium tracking-wide bg-black self-stretch p-3 rounded-2xl hover:scale-95">
+                  <button   className="text-cyan-500 text-opacity-90 text-xl font-medium tracking-wide bg-black self-stretch p-3 rounded-2xl hover:scale-95 mt-8">
                     Create Account
                   </button>
+                </div>
+              </form>
+                 
+                <div className="flex sm:w-[39vw] max-w-full flex-col pt-8 gap-4 ml-5">
+                 
                   <div className="border self-stretch flex grow flex-col  p-4 rounded-2xl border-solid border-black max-md:max-w-full hover:scale-95">
                     <div className="self-center flex h-[15px] items-center justify-between gap-5 ">
                       <img
