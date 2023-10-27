@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import SignInForm from './components/SignInForm';
 import PatientsList from './pages/PatientsList';
 import NewPatientForm from './components/newPatientForm';
-import PatientReport from './pages/PatientReport';
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
     <Route exact="true" path="/SignIn" element={<SignInForm/>}/>
     <Route exact="true" path="/PatientsList" element={<PatientsList/>}/>
     <Route exact="true" path="/NewPatientForm" element={<NewPatientForm/>}/>
-    <Route exact="true" path="/PatientReport" element={<PatientReport/>}/>
     </Routes>
     </BrowserRouter>
     </>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { db } from '../config/firebase';
 import { getDocs, collection} from 'firebase/firestore';
-import { deleteDoc, doc } from 'firebase/firestore'
 import PatientCard from '../components/PatientCard';
 import { useEffect, useState } from 'react'
 import patient from "../assets/patient.png"

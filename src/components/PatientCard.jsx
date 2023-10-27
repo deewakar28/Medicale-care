@@ -1,11 +1,16 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import patientImg from "../assets/patient.png";
 import { db } from '../config/firebase';
 import { deleteDoc, doc, getDoc } from 'firebase/firestore';
 import Rport from './Report';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 function PatientCard(prop) {
+  useEffect(()=>{
+    Aos.init({duration: 500});
+  },[])
   const [showReport, setShowReport] = useState(false);
   const [filteredData, setFilteredData] = useState(null);
 
@@ -33,7 +38,7 @@ function PatientCard(prop) {
 
   return (
     <>
-      <div className='w-[90vw] bg-gray-300 lg:flex-row lg:h-[9vh] mx-auto rounded-2xl justify-between items-center px-2 flex flex-col gap-4 py-4 lg:py-0'>
+      <div data-aos="fade-down" className='w-[90vw] bg-gray-300 lg:flex-row lg:h-[9vh] mx-auto rounded-2xl justify-between items-center px-2 flex flex-col gap-4 py-4 lg:py-0'>
         <div className='h-[9vh] '><img className='h-[9vh]' src={patientImg} alt="" /></div>
         <div className='min-w-[250px] text-center'><p>{prop.Name}</p></div>
         <div><p>{prop.phone}</p></div>
